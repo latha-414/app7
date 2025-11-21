@@ -7,7 +7,7 @@ COPY index.html /usr/share/nginx/html/index.html
 
 # Listen on port 3000 (instead of 80)
 ENV NGINX_PORT=3000
-EXPOSEexposed 3000
+EXPOSE 3000
 
 # THIS SINGLE LINE FIXES React Router / SPA routing – no .conf file needed!
 RUN echo 'server { \
