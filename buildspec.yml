@@ -18,8 +18,9 @@ phases:
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Writing imagedefinitions.json...
-      - printf '[{"name":"%s","imageUri":"%s"}]' $IMAGE_REPO_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - echo Writing imagedefinitions.json with correct container name...
+      # THIS IS THE FIX — extracts "app7" from "app7-prod"
+      - printf '[{"name":"%s","imageUri":"%s"}]' $(echo $IMAGE_REPO_NAME | cut -d'-' -f1) $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 
 artifacts:
